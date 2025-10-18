@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emafido Emmanuel Aridon - Profile Card</title>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #ff9e00;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .profile-card {
+            background-color: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            width: 100%;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .profile-header {
+            background: var(--gradient);
+            color: white;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .avatar-container {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background-color: var(--light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--dark);
+            font-weight: bold;
+        }
+
+        .profile-name {
+            font-size: 2rem;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .profile-title {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .current-time {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .profile-content {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        @media (min-width: 768px) {
+            .profile-content {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .profile-header {
+                flex-direction: row;
+                text-align: left;
+                padding: 40px;
+            }
+            
+            .avatar-container {
+                margin-right: 30px;
+                margin-bottom: 0;
+            }
+        }
+
+        .section {
+            background-color: var(--light);
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--success);
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 10px;
+        }
+
+        .bio {
+            line-height: 1.6;
+            color: var(--dark);
+        }
+
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient);
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+        }
+
+        .list {
+            list-style-type: none;
+        }
+
+        .list-item {
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            transition: transform 0.2s ease;
+        }
+
+        .list-item:hover {
+            transform: translateX(5px);
+        }
+
+        .hobbies .list-item {
+            border-left: 4px solid var(--success);
+        }
+
+        .dislikes .list-item {
+            border-left: 4px solid var(--accent);
+        }
+
+        .list-item i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--dark);
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .tech-item {
+            background: var(--gradient);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <article class="profile-card" data-testid="test-profile-card">
+        <header class="profile-header">
+            <figure class="avatar-container" data-testid="test-user-avatar-container">
+                <img src="Profile Pic.jpg" alt="Profile picture of Emafido Emmanuel Aridon" class="avatar" data-testid="test-user-avatar">
+                <figcaption class="visually-hidden" data-testid="test-user-avatar-caption">
+                    Profile picture of Emafido Emmanuel Aridon
+                </figcaption>
+            </figure>
+            <div class="header-content">
+                <h1 class="profile-name" data-testid="test-user-name">Emafido Emmanuel Aridon</h1>
+                <p class="profile-title" data-testid="test-user-title">Junior Web Developer</p>
+        </header>
+
+        <main class="profile-content">
+            <section class="section bio-section">
+                <h2 class="section-title" data-testid="test-bio-title">
+                    <i>📝</i> About Me
+                </h2>
+                <p class="bio" data-testid="test-user-bio">
+                    Passionate junior web developer with expertise in HTML, CSS, JavaScript, React, and Tailwind CSS. 
+                    I love creating responsive, accessible web applications with clean code and modern design principles. 
+                    Always eager to learn new technologies and collaborate on exciting projects.
+                </p>
+                
+                <h3 class="section-title" style="font-size: 1.1rem; margin-top: 20px;">
+                    <i>⚡</i> Tech Stack
+                </h3>
+                <div class="tech-stack">
+                    <span class="tech-item">HTML</span>
+                    <span class="tech-item">CSS</span>
+                    <span class="tech-item">JavaScript</span>
+                    <span class="tech-item">React</span>
+                    <span class="tech-item">Tailwind</span>
+                </div>
+            </section>
+
+            <section class="section social-section">
+                <h2 class="section-title" data-testid="test-social-title">
+                    <i>🌐</i> Connect With Me
+                </h2>
+                <nav class="social-links" data-testid="test-user-social-links" aria-label="Social media links">
+                    <a href="https://linkedin.com/in/emmanuelemafido" class="social-link" target="_blank" rel="noopener noreferrer" data-testid="test-user-social-linkedin">
+                        LinkedIn
+                    </a>
+                    <a href="https://github.com/emafido" class="social-link" target="_blank" rel="noopener noreferrer" data-testid="test-user-social-github">
+                        GitHub
+                    </a>
+                    <a href="https://x.com/emafido" class="social-link" target="_blank" rel="noopener noreferrer" data-testid="test-user-social-twitter">
+                        Twitter
+                    </a>
+                    <a href="https://instagram.com/emafido" class="social-link" target="_blank" rel="noopener noreferrer" data-testid="test-user-social-instagram">
+                        Instagram
+                    </a>
+                </nav>
+            </section>
+
+            <section class="section hobbies">
+                <h2 class="section-title" data-testid="test-hobbies-title">
+                    <i>🎯</i> Hobbies & Interests
+                </h2>
+                <ul class="list" data-testid="test-user-hobbies">
+                    <li class="list-item" data-testid="test-user-hobby-1">
+                        <i>💻</i> Coding & Web Development
+                    </li>
+                    <li class="list-item" data-testid="test-user-hobby-2">
+                        <i>🎨</i> UI/UX Design
+                    </li>
+                    <li class="list-item" data-testid="test-user-hobby-3">
+                        <i>📚</i> Reading Tech Blogs
+                    </li>
+                    <li class="list-item" data-testid="test-user-hobby-4">
+                        <i>🎵</i> Listening to Music
+                    </li>
+                    <li class="list-item" data-testid="test-user-hobby-5">
+                        <i>🚴</i> Cycling
+                    </li>
+                </ul>
+            </section>
+
+            <section class="section dislikes">
+                <h2 class="section-title" data-testid="test-dislikes-title">
+                    <i>🚫</i> Pet Peeves
+                </h2>
+                <ul class="list" data-testid="test-user-dislikes">
+                    <li class="list-item" data-testid="test-user-dislike-1">
+                        <i>😫</i> Inconsistent code formatting
+                    </li>
+                    <li class="list-item" data-testid="test-user-dislike-2">
+                        <i>🕒</i> Poorly documented code
+                    </li>
+                    <li class="list-item" data-testid="test-user-dislike-3">
+                        <i>🌧️</i> Rainy days without coffee
+                    </li>
+                    <li class="list-item" data-testid="test-user-dislike-4">
+                        <i>📵</i> Slow internet connections
+                    </li>
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            <p data-testid="test-footer-text">© 2025 Emafido Emmanuel Aridon. All rights reserved.</p>
+        </footer>
+    </article>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const avatar = document.querySelector('[data-testid="test-user-avatar"]');
+            avatar.onerror = function() {
+                this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDE1MCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxNTAiIGhlaWdodD0iMTUwIiBmaWxsPSIjNDM2MWVlIi8+Cjx0ZXh0IHg9Ijc1IiB5PSI4MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+RUE8L3RleHQ+Cjwvc3ZnPgo=';
+                this.alt = "Default avatar for Emafido Emmanuel Aridon";
+            };
+        });
+    </script>
+</body>
+</html>
